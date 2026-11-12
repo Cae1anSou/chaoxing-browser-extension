@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "chaoxing-browser-extension",
+  "version": "0.5.0",
+  "description": "研究用：鼠标事件拦截、反调试处理和基于逐题反馈的答案枚举。",
+  "permissions": ["storage"],
+  "minimum_chrome_version": "111",
+  "content_scripts": [
+    {
+      "matches": ["https://*.chaoxing.com/*"],
+      "include_globs": ["https://mooc*.chaoxing.com/*"],
+      "js": ["main.js", "page-actions.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": ["https://*.chaoxing.com/mooc-ans/work/doHomeWorkNew*"],
+      "js": ["quiz-core.js", "quiz-auto-core.js", "quiz-page.js", "quiz-auto.js", "quiz.js"],
+      "run_at": "document_idle",
+      "world": "ISOLATED",
+      "all_frames": true
+    }
+  ]
+}
