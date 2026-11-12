@@ -1,5 +1,7 @@
 # chaoxing-browser-extension
 
+[![CI](https://github.com/Cae1anSou/chaoxing-browser-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/Cae1anSou/chaoxing-browser-extension/actions/workflows/ci.yml)
+
 一个面向超星学习页面的浏览器插件，基于 Chrome Manifest V3 实现，提供鼠标移出事件拦截、已识别的反调试处理，以及基于逐题反馈的手动和自动答案枚举功能。
 
 当前版本为 **0.5.0**。插件可以直接加载，无需构建，也不需要部署后端服务。
@@ -127,6 +129,8 @@ node --test tests/*.test.cjs
 ```
 
 测试覆盖鼠标事件拦截、反调试处理、页面控件桥接、候选枚举、正确答案锁定、反馈冲突及自动会话等逻辑，不执行真实作业提交。`tests/quiz-pruning.test.cjs` 遍历五选多选的所有非空真值，验证轮数、剪枝、唯一答案验证和规则矛盾回退。
+
+GitHub Actions 的 [CI 工作流](.github/workflows/ci.yml) 会在推送和 Pull Request 时自动使用 Node.js 24 检查插件与测试脚本的 JavaScript 语法，并运行上述全部单元测试，无需安装第三方依赖。也可以在仓库的 Actions → CI 页面点击 Run workflow 手动运行。CI 不执行浏览器模拟或真实站点提交。
 
 [`tests/browser-auto-fixture.js`](tests/browser-auto-fixture.js) 提供浏览器模拟场景，用于验证 DOM 操作、Web Locks 和 iframe 重建。模拟不代替真实扩展隔离环境中的 CSP 验证，也不代表已验证所有平台页面。
 
